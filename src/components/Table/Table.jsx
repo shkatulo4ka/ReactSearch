@@ -12,6 +12,8 @@ const Table = ({ data, columns }) => {
             <th key={el}>{el}</th>
           ))}
         </tr>
+      </thead>
+      <tbody>
         {data.map(({ name, description, typeName, count }) => (
           <tr key={name}>
             <td>{name}</td>
@@ -20,7 +22,7 @@ const Table = ({ data, columns }) => {
             <td>{typeName}</td>
           </tr>
         ))}
-      </thead>
+      </tbody>
     </table>
   );
 };

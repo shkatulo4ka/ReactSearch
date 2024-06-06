@@ -3,6 +3,7 @@ import "./App.css";
 import Button from "./components/Button/Button";
 import Table from "./components/Table/Table";
 import { normalizeRequest } from "./utils";
+import Input from "./components/Input/Input";
 
 function App() {
   const [data, setData] = useState([]);
@@ -30,10 +31,27 @@ function App() {
 
   const columns = ["Название", "Количество", "Описание", "Тип"];
 
+  const inputChange = (event) => {
+    return event.target.value;
+  };
+
   return (
     <>
-      <h1>Заголовок</h1>
-      <div>Проект</div>
+      <h1>Поиск заявок</h1>
+      <Input
+        divName="Название:"
+        type="text"
+        className="inputName"
+        onChange={inputChange}
+        placeholder="Введите название заявки..."
+      />
+      <Input
+        divName="Количество:"
+        type="number"
+        className="inputNumber"
+        min="0"
+        placeholder="Введите количество заявок..."
+      />
       <Button />
       <Table data={data} columns={columns} />
     </>
