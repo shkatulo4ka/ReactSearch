@@ -5,11 +5,14 @@ import { useState } from "react";
 import { normalizeRequest } from "../../utils";
 
 function SearchForm({ setData }) {
+  const [inputName, setInputName] = useState("");
+  const [inputCount, setInputCount] = useState();
+
   const searchData = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const formProps = Object.fromEntries(formData);
-    console.log(formProps);
+    // const formData = new FormData(e.target);
+    // const formProps = Object.fromEntries(formData);
+    // console.log(formProps);
     const body = JSON.stringify({
       active: true,
       fields: {
@@ -18,7 +21,7 @@ function SearchForm({ setData }) {
       filter: {
         eql: {
           //   query: "([number] = 1) AND [__name] = 'первый 1'",
-          query: `([number] = ${inputCount ? inputCount : undefined} ) AND [__name] = '${inputName ? inputName : ""}'`,
+          query: `([number] >= ${inputCount ? inputCount : 0} ) AND [__name] LIKE '${inputName}'`,
         },
       },
     });
@@ -36,12 +39,11 @@ function SearchForm({ setData }) {
       )
       .catch((error) => console.log(error));
   };
-  const [inputCount, setInputCount] = useState([]);
+
   const inputCountChange = (event) => {
     console.log(event.target.value);
     setInputCount(event.target.value);
   };
-  const [inputName, setInputName] = useState([]);
 
   const inputNameChange = (event) => {
     console.log(event.target.value);
