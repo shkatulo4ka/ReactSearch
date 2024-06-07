@@ -2,7 +2,7 @@
 import "./Table.css";
 
 const Table = ({ data, columns }) => {
-  console.log(data);
+  //console.log(data);
 
   return (
     <table>
