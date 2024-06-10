@@ -14,8 +14,8 @@ const Table = ({ data, columns }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map(({ name, description, typeName, count }) => (
-          <tr key={name}>
+        {data.map(({ id, name, description, typeName, count }) => (
+          <tr key={id}>
             <td>{name}</td>
             <td>{count}</td>
             <td>{description}</td>

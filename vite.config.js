@@ -6,11 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": {
-        target: "https://hv6bllib6x2fq.elma365.ru/pub/v1",
+      "/pub/v1": {
+        target: "https://hv6bllib6x2fq.elma365.ru",
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        // rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },

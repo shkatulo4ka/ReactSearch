@@ -2,72 +2,68 @@ import "./SearchForm.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import { useState } from "react";
-import { normalizeRequest } from "../../utils";
+import Select from "react-select";
 
-function SearchForm({ setData }) {
+function SearchForm({ submitFormHandler }) {
   const [inputName, setInputName] = useState("");
   const [inputCount, setInputCount] = useState();
+  const [selectCode, setSelectCode] = useState([]);
 
-  const searchData = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
-    // const formData = new FormData(e.target);
-    // const formProps = Object.fromEntries(formData);
-    // console.log(formProps);
-    const body = JSON.stringify({
-      active: true,
-      fields: {
-        "*": true,
-      },
-      filter: {
-        eql: {
-          //   query: "([number] = 1) AND [__name] = 'первый 1'",
-          query: `([number] >= ${inputCount ? inputCount : 0} ) AND [__name] LIKE '${inputName}'`,
-        },
-      },
+    submitFormHandler({
+      name: inputName,
+      count: inputCount,
+      code: selectCode,
     });
-
-    fetch("/api/app/publicity_management/requests/list", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer b370464f-3cff-4f14-af1f-b8052e471541",
-      },
-      body,
-    })
-      .then((response) => response.json())
-      .then((res) =>
-        setData(res.result.result.map((el) => normalizeRequest(el))),
-      )
-      .catch((error) => console.log(error));
   };
 
-  const inputCountChange = (event) => {
+  const inputCountChangeHandler = (event) => {
     console.log(event.target.value);
     setInputCount(event.target.value);
   };
 
-  const inputNameChange = (event) => {
+  const inputNameChangeHandler = (event) => {
     console.log(event.target.value);
     setInputName(event.target.value);
   };
 
+  const selectHandler = (data) => {
+    console.log(data);
+    setSelectCode(data.map((e) => e.value));
+  };
+
+  const options = [
+    { value: "internal", label: "Внутренняя" },
+    { value: "external", label: "Внешняя" },
+  ];
+
   return (
-    <form className="search_form" onSubmit={searchData}>
+    <form className="search_form" onSubmit={submitHandler}>
       <Input
         divName="Название:"
         type="text"
-        className="inputName"
         value={inputName}
-        onChange={inputNameChange}
+        onChange={inputNameChangeHandler}
         placeholder="Введите название заявки..."
       />
       <Input
         divName="Количество:"
         type="number"
         value={inputCount}
-        className="inputNumber"
         min="0"
-        onChange={inputCountChange}
+        onChange={inputCountChangeHandler}
         placeholder="Введите количество заявок..."
+      />
+      <Select
+        defaultValue={options}
+        isMulti
+        name="colors"
+        options={options}
+        className="basic-multi-select"
+        classNamePrefix="select"
+        onChange={selectHandler}
+        placeholder="Укажите тип заявки..."
       />
       <Button className={"search_button"} text={"Поиск"} />
     </form>

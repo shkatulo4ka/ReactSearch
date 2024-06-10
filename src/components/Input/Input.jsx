@@ -10,7 +10,6 @@ const Input = ({
 }) => {
   return (
     <div>
-      {" "}
       {divName}
       <input
         type={type}
