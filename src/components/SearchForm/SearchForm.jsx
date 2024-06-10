@@ -19,18 +19,15 @@ function SearchForm({ submitFormHandler }) {
   };
 
   const inputCountChangeHandler = (event) => {
-    console.log(event.target.value);
     setInputCount(event.target.value);
   };
 
   const inputNameChangeHandler = (event) => {
-    console.log(event.target.value);
     setInputName(event.target.value);
   };
 
   const selectHandler = (data) => {
-    console.log(data);
-    setSelectCode(data.map((e) => e.value));
+    setSelectCode(data.map((el) => el.value));
   };
 
   const options = [
@@ -41,14 +38,18 @@ function SearchForm({ submitFormHandler }) {
   return (
     <form className="search_form" onSubmit={submitHandler}>
       <Input
-        divName="Название:"
+        name="name"
+        className={"input_block"}
+        label="Название:"
         type="text"
         value={inputName}
         onChange={inputNameChangeHandler}
         placeholder="Введите название заявки..."
       />
       <Input
-        divName="Количество:"
+        name="count"
+        label="Количество от:"
+        className={"input_block"}
         type="number"
         value={inputCount}
         min="0"

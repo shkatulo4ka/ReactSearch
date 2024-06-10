@@ -1,25 +1,24 @@
 import "./Input.css";
 
 const Input = ({
-  divName,
+  label,
   type,
   className,
+  name,
   onChange,
   placeholder,
   ...attrs
-}) => {
-  return (
-    <div>
-      {divName}
-      <input
-        type={type}
-        className={className}
-        onChange={onChange}
-        placeholder={placeholder}
-        {...attrs}
-      />
-    </div>
-  );
-};
+}) => (
+  <div className={className}>
+    <label htmlFor={name}>{label}</label>
+    <input
+      type={type}
+      id={name}
+      onChange={onChange}
+      placeholder={placeholder}
+      {...attrs}
+    />
+  </div>
+);
 
 export default Input;

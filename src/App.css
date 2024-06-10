@@ -41,4 +41,27 @@
   color: #888;
 }
 
+.pages {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+ul { list-style: none; }
+
+.pages li {
+  cursor: pointer;
+    width: 25px;
+    border-radius: 5px;
+}
+
+.pages li.selected {
+  background-color: #e6e4e4;
+}
+
+.pages li:hover {
+  background-color: #efefef;
+}
+
+
 

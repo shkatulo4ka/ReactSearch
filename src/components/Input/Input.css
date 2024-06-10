@@ -3,3 +3,15 @@ input {
     padding: 5px;
     width: 300px;
 }
+
+
+label{
+    text-align: left;
+    display: block;
+    width: 120px;
+}
+
+.input_block{
+    display: flex;
+    align-items: center;
+}
